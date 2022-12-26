@@ -1,0 +1,29 @@
+DSEG SEGMENT
+     RESULT DW 1 DUP(?)
+     N EQU 8
+DSEG ENDS
+
+CSEG SEGMENT
+    ASSUME CS:CSEG,DS:DSEG
+    
+JIECHENG PROC
+      MUL CX
+      MOV DS:[SI],AX
+      RET
+JIECHENG ENDP
+
+START:MOV AX,DSEG
+      MOV DS,AX
+      MOV CX,N-1
+      MOV AX,N
+      LEA SI,RESULT
+                   
+AGAIN:CALL JIECHENG
+      LOOP AGAIN
+      
+CSEG ENDS
+      END START
+
+      
+      
+      

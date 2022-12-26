@@ -1,0 +1,29 @@
+DSEG SEGMENT
+BUF DW 1345H,637H,289H,3A6H,86BH,723H,3F6H,763H,176EH,4D4H
+AVE DW 2 DUP(0)
+DSEG ENDS
+
+
+CSEG SEGMENT
+    ASSUME CS:CSEG,DS:DSEG
+    
+START:MOV AX,DSEG
+      MOV DS,AX
+      LEA SI,BUF
+      MOV CX,10
+AGAIN:MOV AX,[SI]
+      ADD AVE,AX
+      INC SI
+      INC SI
+      LOOP AGAIN
+      SHR SI,1
+      MOV AX,AVE
+      DIV SI
+      MOV AVE,AX
+                         
+CSEG ENDS
+      END START
+
+      
+      
+      
